@@ -1,19 +1,39 @@
 import { styled } from "@mui/material";
-import tema from "../../themes/theme";
 
 export const ListStyled = styled("ul")`
 width: 100% ;
 max-width: 900px ;
+margin: 0 auto;
+padding:  ${({ theme }) => theme.spacing(10, 2, 10, 2)};
+
+display: grid ;
+grid-template-columns: 1fr 1fr ;
+gap: ${({ theme }) => theme.spacing(9)};
+
+${({theme}) => theme.breakpoints.down("md")}{
+  grid-template-columns: 1fr ;
+  gap: ${({ theme }) => theme.spacing(7)};
+
+}
 `;
 
-export const ListItens = styled("li")`
+export const ListItens = styled('li')`
   list-style: none;
-  display: flex ;
-  border: solid 1px red ;
+ display: flex ;
+ flex-direction: column;
+  width: 100% ;
 `;
-
+export const EmptyList = styled("h2")`
+  text-align: center ;
+  padding: ${({theme}) => theme.spacing(12,0) };
+  height: 100vh ;
+`;
 export const Picture = styled("img")`
   width: 100%;
+`;
+
+export const Informations = styled("div")`
+ width: 100%;
 `;
 
 export const Name = styled("h3")`

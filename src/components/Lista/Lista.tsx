@@ -1,24 +1,43 @@
-import { Button, ListItem } from "@mui/material";
-import { Description, ListStyled, Name, Picture, Value } from "./Lista.style";
+import { Button } from "@mui/material";
+import { IPropsTeacher } from "../../@types/teacher";
+import {
+  Description,
+  ListStyled,
+  Name,
+  Picture,
+  Value,
+  Informations,
+  ListItens,
+  EmptyList,
+} from "./Lista.style";
 
-const Lista = () => {
+interface IListTeachers {
+  teachers: IPropsTeacher[];
+}
+
+const Lista = (props: IListTeachers) => {
   return (
-    <ListStyled>
-      <ListItem>
-        <Picture src="https://github.com/rwaik-dev.png" />
-        <div>
-          <Name>Wilker Rwaik Eloi</Name>
-          <Value>R$ 1.000.000.000,00 por hora</Value>
-          <Description>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
-            excepturi aspernatur nemo, sequi facilis dignissimos quibusdam
-            officiis recusandae, quam reiciendis eaque error, labore aliquid
-            placeat quis nulla cum? Laborum, molestias.
-          </Description>
-          <Button>Marcar Aulas</Button>
-        </div>
-      </ListItem>
-    </ListStyled>
+    <div>
+      {props.teachers.length > 0 ? (
+        <ListStyled>
+          {props.teachers.map((teacher) => (
+            <ListItens key={teacher.id}>
+              <Picture src={teacher.picture} />
+              <Informations>
+                <Name>{teacher.name}</Name>
+                <Value>{teacher.value_hour.toLocaleString("pt-br", {minimumFractionDigits: 2, style: "currency", currency: "BRL"})} por hora</Value>
+                <Description>{teacher.description}</Description>
+                <Button sx={{ width: "70%" }}>
+                  Marcar Aulas com {teacher.name}
+                </Button>
+              </Informations>
+            </ListItens>
+          ))}
+        </ListStyled>
+      ) : (
+        <EmptyList>Nada foi encontrado</EmptyList>
+      )}
+    </div>
   );
 };
 
